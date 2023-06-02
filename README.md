@@ -279,13 +279,11 @@ Pour avoir plus de détails sur le fonctionnement de Passport, vous pouvez consu
 
 ## Retour d'expérience sur le projet
 
-Pour ce projet, nous nous sommes appuyés sur les travaux des deux groupes de la partie 1 et 2,  et nous avons essayé de respecter du mieux que possible la chartre graphique proposée dans le premier rapport. Nous avons également, au départ, développé tout le routing proposé dans le rapport n°2, afin de respecter du mieux que possible les idées proposées.
+Pour ce projet, nous nous sommes appuyés sur les travaux des deux groupes de la partie 1 et 2. Et nous avons essayé de respecter du mieux que possible la charte graphique proposée dans le premier rapport. Au départ, nous avons également développé tout le routing proposé dans le rapport n°2, afin de respecter du mieux que possible les idées proposées.
 
-Mais assez rapidement, nous avons dû faire un tri sur les travaux des autres groupes, et nous avons retravaillé certaines fonctionnalités qui avaient été omises dans les rapports, et des incohérences entre les deux rapports nous ont bloqués parfois.
+Toutefois, assez rapidement, nous avons dû faire un tri sur les travaux des autres groupes. Nous avons retravaillé certaines fonctionnalités qui avaient été omises dans les rapports. Certaines incohérences entre les deux rapports ont dû être résolues. Après clarification de ces éléments entre nous et avec les deux anciens groupes, nous avons réussi assez vite à développer l'intégralité du site. Il y a encore certaines fonctionnalités qui peuvent être ajouté (notamment celles proposés par le groupe du rapport 1), et une mise en page adaptée à un téléphone pourrait être intéressante.
 
-Après s’être mis au clair entre nous et avec les deux anciens groupes, nous avons pu commencer à travailler et finalement, nous avons réussi assez vite à tout développer. Il y a encore certaines fonctionnalités qui peuvent être ajouté (notamment celles proposés par le groupe du rapport 1), et de la mise en page adaptée au téléphone peut être intéressant à mettre en place.
-
-Il reste donc des choses à faire avec ce projet, mais nous sommes très contents du résultat que nous avons obtenu, et nous trouvons que, malgré les modifications que nous avons dû apporter, le site final correspond bien à ce qui était attendu par les deux autres groupes.
+Il reste donc quelques détails qui pourraient être améliorés sur ce projet, mais nous sommes très satisfaits du résultat obtenu. Nous trouvons que malgré les modifications que nous avons dû apporter, le site final correspond bien à ce qui était attendu par les deux autres groupes.
 
 
 
