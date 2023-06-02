@@ -74,5 +74,3 @@ INSERT INTO `user` (`password`, `nom`, `prenom`, `adresse_mail`, `departement`, 
 
 INSERT INTO `user` (`password`, `nom`, `prenom`, `adresse_mail`, `departement`, `langue`, `role`, `etat`) VALUES
 ('aaa', 'Dupond', 'Jean', 'jean@dupond', 'INFO', 'francais', 'beau-gosse', '0');
-
-insert into taches (idCreateur, idRealisateur, titre, date, notes, etat) values (1, 1, 'zzaeaz', '1980-12-17', 'aaza', 0);

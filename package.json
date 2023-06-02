@@ -1,4 +1,10 @@
 {
+  "name": "potager",
+  "version": "1.0.0",
+  "description": "Projet Web - Mon Potager",
+  "author": {
+    "name": "Tanguy HUE | Bastien BAUDOUIN | Emilien L'HARIDON"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-ensure-login": "^0.1.1",
@@ -14,6 +20,7 @@
     "start": "nodemon server.js"
   },
   "devDependencies": {
-    "nodemon": "^1.19.0"
+    "eslint": "^8.41.0",
+    "nodemon": "^1.19.4"
   }
 }

@@ -58,7 +58,10 @@ module.exports = (passport) => {
             planteData => {
                 res.set('Content-type', 'application/json');
                 res.send(JSON.stringify(planteData));
-            }
+            },
+            err => {
+                next(err);
+            },
         )
     });
 
@@ -100,32 +103,7 @@ module.exports = (passport) => {
         );
     });
 
-    app.post('/taches/:idTache/add/:idUser', function (req, res, next) {
-        dbHelper.taches.addUser(req.params.idTache, req.params.idUser).then(
-            taches => {
-                res.set('Content-type', 'application/json');
-                res.send(JSON.stringify(taches));
-            },
-            err => {
-                next(err);
-            },
-        );
-    });
-
-
-    app.post('/taches/:idTache/remove', function (req, res, next) {
-        dbHelper.taches.suppTache(req.params.idTache).then(
-            taches => {
-                res.set('Content-type', 'application/json');
-                res.send(JSON.stringify(taches));
-            },
-            err => {
-                next(err);
-            },
-        );
-    });
-
-    app.post('/taches/changeEtat', function (req, res, next){
+    app.post('/taches/changeEtat', function (req, res, next) {
         dbHelper.taches.changeEtat(req.body.id, req.body.etat).then(
             taches => {
                 res.set('Content-type', 'application/json');
@@ -137,7 +115,7 @@ module.exports = (passport) => {
         )
     });
 
-    app.post('/taches/changeRealisateur', function (req, res, next){
+    app.post('/taches/changeRealisateur', function (req, res, next) {
         dbHelper.taches.changeRealisateur(req.body.id, req.body.realisateur).then(
             taches => {
                 res.set('Content-type', 'application/json');
@@ -149,10 +127,41 @@ module.exports = (passport) => {
         )
     });
 
+    app.post('/taches/add', function (req, res, next) {
+        const idCreateur = req.body.idCreateur; 
+        const idRealisateur = req.body.idRealisateur;
+        const titre = req.body.titre;
+        const date = req.body.date;
+        const notes = req.body.notes;
 
-    // Authentification pour accéder aux parties privées de l'api (on n'en a pas dans cet exemple)
-    // et aux templates privés
-    // C'est ici qu'on utilise passport pour créer une session utilisateur
+        dbHelper.taches.addTache(idCreateur, idRealisateur, titre, date, notes).then(
+            taches => {
+                res.set('Content-type', 'application/json');
+                res.send(JSON.stringify(taches));
+            },
+            err => {
+                next(err);
+            },
+        );
+
+    });
+
+    app.post('/taches/remove', function (req, res, next) {
+        dbHelper.taches.rmTache(req.body.id).then(
+            taches => {
+                res.set('Content-type', 'application/json');
+                res.send(JSON.stringify(taches));
+            },
+            err => {
+                next(err);
+            },
+        );
+
+    });
+
+
+    // Partie /users
+
     app.post('/login', function (req, res, next) {
         if (!req.body.username) {
             return res.send({ success: false, message: 'empty username' });
@@ -194,21 +203,23 @@ module.exports = (passport) => {
     });
 
     app.post('/user/add', function (req, res, next) {
-        const adresse_mail = req.body.email; // Récupérer l'adresse mail à partir du corps de la requête
-        console.log(adresse_mail);
-        const password = req.body.password; // Récupérer le mot de passe à partir du corps de la requête
-        const nom = req.body.nom; // Récupérer le nom à partir du corps de la requête
-        const prenom = req.body.prenom; // Récupérer le prénom à partir du corps de la requête
-        const departement = req.body.departement; // Récupérer le département à partir du corps de la requête
-        const langue = req.body.langue; // Récupérer la langue à partir du corps de la requête
-        const role = req.body.role; // Récupérer le rôle à partir du corps de la requête
+        const adresse_mail = req.body.email;
+        const password = req.body.password;
+        const nom = req.body.nom;
+        const prenom = req.body.prenom;
+        const departement = req.body.departement;
+        const langue = req.body.langue;
+        const role = req.body.role;
         const etat = 0;
 
         dbHelper.users.addUser(adresse_mail, password, nom, prenom, departement, langue, role, etat).then(
             taches => {
                 res.set('Content-type', 'application/json');
                 res.send(JSON.stringify(taches));
-            }
+            },
+            err => {
+                next(err);
+            },
         );
     });
 
@@ -220,7 +231,10 @@ module.exports = (passport) => {
             taches => {
                 res.set('Content-type', 'application/json');
                 res.send(JSON.stringify(taches));
-            }
+            },
+            err => {
+                next(err);
+            },
         );
     });
 
@@ -248,52 +262,31 @@ module.exports = (passport) => {
         );
     });
 
-    app.post('/taches/add', function (req, res, next) {
-        const idCreateur = req.body.idCreateur; // Récupérer l'id du créateur de la tâche à partir du corps de la requête
-        const idRealisateur = req.body.idRealisateur; // Récupérer l'id du réalisateur de la tâche à partir du corps de la requête
-        const titre = req.body.titre; // Récupérer le titre de la tâche à partir du corps de la requête
-        const date = req.body.date; // Récupérer la date de la tâche à partir du corps de la requête
-        const notes = req.body.notes; // Récupérer les notes de la tâche à partir du corps de la requête
-
-        dbHelper.taches.addTache(idCreateur, idRealisateur, titre, date, notes).then(
-            taches => {
-                res.set('Content-type', 'application/json');
-                res.send(JSON.stringify(taches));
-            }
-        );
-
-    });
-
-    app.post('/taches/remove', function (req, res, next) {
-        dbHelper.taches.rmTache(req.body.id).then(
-            taches => {
-                res.set('Content-type', 'application/json');
-                res.send(JSON.stringify(taches));
-            }
-        );
-
-    });
+    // Partie /potager
 
     app.post('/potager/add', function (req, res, next) {
-        const idUser = req.body.idUser; // Récupérer l'id du créateur de la tâche à partir du corps de la requête
-        const idPlante = req.body.idPlante; // Récupérer l'id du réalisateur de la tâche à partir du corps de la requête
-        const x = req.body.x; // Récupérer le titre de la tâche à partir du corps de la requête
-        const y = req.body.y; // Récupérer la date de la tâche à partir du corps de la requête
-        const date_recolte = req.body.date_recolte; // Récupérer les notes de la tâche à partir du corps de la requête
-        const date_dernier_arrosage = req.body.date_dernier_arrosage; // Récupérer les notes de la tâche à partir du corps de la requête
+        const idUser = req.body.idUser; 
+        const idPlante = req.body.idPlante;
+        const x = req.body.x;
+        const y = req.body.y;
+        const date_recolte = req.body.date_recolte;
+        const date_dernier_arrosage = req.body.date_dernier_arrosage;
 
         dbHelper.PlantePotager.addPotager(idUser, idPlante, x, y, date_recolte, date_dernier_arrosage).then(
             potagers => {
                 res.set('Content-type', 'application/json');
                 res.send(JSON.stringify(potagers));
-            }
+            },
+            err => {
+                next(err);
+            },
         );
     });
 
     app.get('/potager/byXandYandUser/:x/:y/:idUser', function (req, res, next) {
-        const x = req.params.x; // Récupérer l'id du créateur de la tâche à partir du corps de la requête
-        const y = req.params.y; // Récupérer le titre de la tâche à partir du corps de la requête
-        const idUser = req.params.idUser; // Récupérer la date de la tâche à partir du corps de la requête
+        const x = req.params.x; 
+        const y = req.params.y;
+        const idUser = req.params.idUser;
 
         dbHelper.PlantePotager.byXandYandUser(x, y, idUser).then(
             potagers => {
@@ -302,21 +295,24 @@ module.exports = (passport) => {
                 }
                 res.set('Content-type', 'application/json');
                 res.send(JSON.stringify(potagers));
-            }
+            },
+            err => {
+                next(err);
+            },
         );
 
     });
 
     app.post('/potager/arrose', function (req, res, next) {
-        const x = req.body.x; // Récupérer l'id du créateur de la tâche à partir du corps de la requête
-        const y = req.body.y; // Récupérer le titre de la tâche à partir du corps de la requête
-        const idUser = req.body.idUser; // Récupérer la date de la tâche à partir du corps de la requête
+        const x = req.body.x; 
+        const y = req.body.y;
+        const idUser = req.body.idUser;
         const dateActuelle = new Date();
         let aujourdhui = '';
         let mois = '';
         let jour = '';
         if (dateActuelle.getMonth() < 10) {
-            mois = '0' + (dateActuelle.getMonth() + 1) ;
+            mois = '0' + (dateActuelle.getMonth() + 1);
         } else {
             mois = dateActuelle.getMonth() + 1;
         }
@@ -330,28 +326,32 @@ module.exports = (passport) => {
         let annee = dateActuelle.getFullYear();
         aujourdhui = annee + '-' + mois + '-' + jour;
 
-        console.log(aujourdhui);
-        console.log('update PlantePotager set date_dernier_arrosage = ' + aujourdhui + ' where x = '+ x + ' and y = ' + y +' and idUser = ' + idUser + ';')
         dbHelper.PlantePotager.arrose(x, y, idUser, aujourdhui).then(
             potagers => {
                 res.set('Content-type', 'application/json');
                 res.send(JSON.stringify(potagers));
-            }
+            },
+            err => {
+                next(err);
+            },
         );
 
     });
 
     app.post('/potager/remove', function (req, res, next) {
-        const x = req.body.x; // Récupérer l'id du créateur de la tâche à partir du corps de la requête
-        const y = req.body.y; // Récupérer le titre de la tâche à partir du corps de la requête
-        const idUser = req.body.idUser; // Récupérer la date de la tâche à partir du corps de la requête
+        const x = req.body.x; 
+        const y = req.body.y;
+        const idUser = req.body.idUser;
         dbHelper.PlantePotager.rmPotager(x, y, idUser).then(
             potagers => {
                 res.set('Content-type', 'application/json');
                 res.send(JSON.stringify(potagers));
-            }
+            },
+            err => {
+                next(err);
+            },
         );
-        
+
     });
     return app;
 }

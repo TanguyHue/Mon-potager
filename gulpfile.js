@@ -70,7 +70,7 @@ gulp.task('validatehtml', function (done) {
             });
             console.log(nbErrors + ' error - ' + nbWarnings + ' warnings\n');
         })
-        .on('end', function(message) {
+        .on('end', function() {
             if (status === true) {
                 console.log(colors.green('No errors or warnings\n'));
             }
