@@ -160,7 +160,7 @@ module.exports = (passport) => {
     });
 
 
-    // Partie /users
+    // Partie /login
 
     app.post('/login', function (req, res, next) {
         if (!req.body.username) {
@@ -201,6 +201,8 @@ module.exports = (passport) => {
             },
         );
     });
+
+    // Partie /user
 
     app.post('/user/add', function (req, res, next) {
         const adresse_mail = req.body.email;

@@ -261,6 +261,7 @@ L'API est composée de 5 routes principales :
 ### Route `/user` : 
 
 - **GET `/user/liste`** : Récupère la liste des utilisateurs.
+- **GET `/user/liste/:id`** : Récupère les informations d'un utilisateur spécifique en utilisant son identifiant.
 - **POST `/user/add`** : Ajoute un utilisateur à la base de données.
 - **POST `/user/changeEtat`** : Modifie l'état du potager d'un utilisateur.	
 
@@ -269,7 +270,7 @@ L'API est composée de 5 routes principales :
 - **GET `/potager/byXandYandUser/:x/:y/:idUser`** : Récupère les informations d'une plante dans le potager d'un utilisateur spécifique en utilisant les coordonnées (x, y).
 - **POST `/potager/add`** : Ajoute une plante dans le potager d'un utilisateur.
 - **POST `/potager/remove`** : Supprime une plante du potager d'un utilisateur.
-- **POST `/potager/arrosage`** : Modifie la date du dernier arrosage d'une plante dans le potager d'un utilisateur.
+- **POST `/potager/arrose`** : Modifie la date du dernier arrosage d'une plante dans le potager d'un utilisateur.
 
 ### Authentification 
 
