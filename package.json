@@ -5,6 +5,7 @@
   "author": {
     "name": "Tanguy HUE | Bastien BAUDOUIN | Emilien L'HARIDON"
   },
+  "homepage": "https://tanguyhue.github.io/Mon-potager",
   "dependencies": {
     "body-parser": "^1.19.0",
     "connect-ensure-login": "^0.1.1",
@@ -16,11 +17,14 @@
     "sqlite3": "^5.0.8"
   },
   "scripts": {
+    "predeploy": "npm run start",
+    "deploy": "gh-pages -d start",
     "createDB": "sqlite3 Potager.db < createDB.sql",
     "start": "nodemon server.js"
   },
   "devDependencies": {
     "eslint": "^8.41.0",
+    "gh-pages": "^5.0.0",
     "nodemon": "^1.19.4"
   }
 }

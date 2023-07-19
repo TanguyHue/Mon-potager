@@ -57,11 +57,11 @@ async function loadTaches(type) {
     try {
         let result;
         if (type == "main") {
-            result = await fetch('http://127.0.0.1:8080/api/tachesComplete/' + context.user.id);
+            result = await fetch('http://127.0.0.1:80/api/tachesComplete/' + context.user.id);
         } else if (type == "visit") {
-            result = await fetch('http://127.0.0.1:8080/api/taches/' + context.user.visit);
+            result = await fetch('http://127.0.0.1:80/api/taches/' + context.user.visit);
         } else if (type == "potager") {
-            result = await fetch('http://127.0.0.1:8080/api/taches/' + context.user.id);
+            result = await fetch('http://127.0.0.1:80/api/taches/' + context.user.id);
         }
         const taches = await result.json();
         let li;
@@ -134,7 +134,7 @@ async function loadTaches(type) {
             bouton.previousRealisateur = taches[i].idRealisateur;
 
             let users;
-            await fetch('http://127.0.0.1:8080/api/user/liste')
+            await fetch('http://127.0.0.1:80/api/user/liste')
                 .then(response => response.json())
                 .then(data => {
                     users = data;
@@ -350,7 +350,7 @@ page('main', async function () {
         departUser.innerHTML = "Département : " + context.user.departement;
 
         let users;
-        await fetch('http://127.0.0.1:8080/api/user/liste')
+        await fetch('http://127.0.0.1:80/api/user/liste')
             .then(response => response.json())
             .then(data => {
                 users = data;
@@ -430,11 +430,11 @@ page('monpotager', async function () {
             boutonsAjout[i].id = j + "" + i % taillePotager.y;
 
             try {
-                result = await fetch('http://127.0.0.1:8080/api/potager/byXandYandUser/' + j + '/' + i % taillePotager.y + '/' + context.user.id);
+                result = await fetch('http://127.0.0.1:80/api/potager/byXandYandUser/' + j + '/' + i % taillePotager.y + '/' + context.user.id);
                 potager = await result.json();
 
                 if (potager != null) {
-                    result = await fetch('http://127.0.0.1:8080/api/planteData/' + potager.idPlanteData);
+                    result = await fetch('http://127.0.0.1:80/api/planteData/' + potager.idPlanteData);
                     plante = await result.json();
                     plantes.push(plante);
                     potagers.push(potager);
@@ -801,7 +801,7 @@ page('autrePotager', async function () {
         await renderTemplate(templates('private/autrePotager/autrePotager.mustache'));
         let userVisit;
         try {
-            const response = await fetch('http://127.0.0.1:8080/api/user/liste');
+            const response = await fetch('http://127.0.0.1:80/api/user/liste');
             if (response.ok) {
                 const result = await response.json();
                 const selectProprietaire = document.getElementById('proprietaire');
@@ -878,11 +878,11 @@ page('autrePotager', async function () {
                 boutonsAjout[i].id = j + "" + i % taillePotager.y;
 
                 try {
-                    result = await fetch('http://127.0.0.1:8080/api/potager/byXandYandUser/' + j + '/' + i % taillePotager.y + '/' + context.user.visit);
+                    result = await fetch('http://127.0.0.1:80/api/potager/byXandYandUser/' + j + '/' + i % taillePotager.y + '/' + context.user.visit);
                     potager = await result.json();
 
                     if (potager != null) {
-                        result = await fetch('http://127.0.0.1:8080/api/planteData/' + potager.idPlanteData);
+                        result = await fetch('http://127.0.0.1:80/api/planteData/' + potager.idPlanteData);
                         plante = await result.json();
                         plantes.push(plante);
                         potagers.push(potager);
@@ -1156,7 +1156,7 @@ page('agenda', async function () {
 
             // Créateur de la tâche
             const popupTaskCreator = document.createElement('p');
-            fetch('http://127.0.0.1:8080/api/user/liste/' + task.idCreateur)
+            fetch('http://127.0.0.1:80/api/user/liste/' + task.idCreateur)
                 .then(response => {
                     response.json().then(users => {
                         const userCreator = users[0];
@@ -1173,7 +1173,7 @@ page('agenda', async function () {
                 popupTaskAssignee.textContent = 'Non assignée';
             }
             else {
-                fetch('http://127.0.0.1:8080/api/user/liste/' + task.idRealisateur)
+                fetch('http://127.0.0.1:80/api/user/liste/' + task.idRealisateur)
                     .then(response => {
                         response.json().then(users => {
                             const userAssignee = users[0];
@@ -1283,7 +1283,7 @@ page('agenda', async function () {
 
         // Récupération des tâches de l'api
         try {
-            fetch('http://127.0.0.1:8080/api/taches/' + context.user.id)
+            fetch('http://127.0.0.1:80/api/taches/' + context.user.id)
                 .then(response => {
                     response.json()
                         .then(tasks => {

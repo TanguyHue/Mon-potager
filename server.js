@@ -34,7 +34,7 @@ app.use(function (req, res) {
 });
 
 // Lancement du serveur web
-var port = 'PORT' in process.env ? process.env.PORT : 8080;
+var port = 'PORT' in process.env ? process.env.PORT : 80;
 app.listen(port, function () {
     console.log('My app is listening at http://127.0.0.1:%s', port);
 });
